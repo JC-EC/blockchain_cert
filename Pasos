@@ -7,3 +7,9 @@ git push -u origin master
 git push -u origin main
 
 git remote add origin https://github.com/tuusuario/tu-repo.git -> por si ya esta creado el repositorio en la web y queremos sincronizar el local 
+
+GitHub Esto traerá los archivos nuevos o modificados que creaste en GitHub.
+git pull origin master
+git pull origin main
+
+git branch
