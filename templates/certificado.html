@@ -23,14 +23,14 @@
 <body>
     <div class="certificado">
         <h1>Certificado Sacramental</h1>
-        <p>Se certifica que:</p>
+        <p>Se certifica que le niño/a:</p>
         <h2>{{ data.nombre }} {{ data.apellido }}</h2>
         <p>Con cédula N° <strong>{{ data.cedula }}</strong></p>
         <p>Ha sido registrado en la cadena de bloques el día de hoy.</p>
         <p><strong>Hash único:</strong> {{ hash }}</p>
 
         <div class="qr">
-            <img src="/{{ qr_path }}" alt="Código QR" width="150">
+            <img src="/{{ qr_path }}" alt="Código QR" width="150" title="Hola">
         </div>
 
         <p style="margin-top: 20px;">Este certificado es verificable en línea.</p>
