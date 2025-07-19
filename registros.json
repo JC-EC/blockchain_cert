@@ -16,5 +16,27 @@
         "timestamp": 1752805767.0673552,
         "previous_hash": "25c9adfca9af930c6bd8f5671a0d568fdfc7d9624dae2d44498a01133b1a940e",
         "hash": "67c2117b093d63c389fd0bab5a55a4a4d8e8de381d2dee8d721781b339cb0db2"
+    },
+    {
+        "index": 2,
+        "data": {
+            "nombre": "Stalin",
+            "apellido": "Araujo",
+            "cedula": "123654"
+        },
+        "timestamp": 1752809057.8667183,
+        "previous_hash": "67c2117b093d63c389fd0bab5a55a4a4d8e8de381d2dee8d721781b339cb0db2",
+        "hash": "699f69d00bff1d3cda7f0dac27e776a5fad1dc65de08ac97fb6be32004177330"
+    },
+    {
+        "index": 3,
+        "data": {
+            "nombre": "Abc",
+            "apellido": "Cab",
+            "cedula": "987654"
+        },
+        "timestamp": 1752940051.8937285,
+        "previous_hash": "699f69d00bff1d3cda7f0dac27e776a5fad1dc65de08ac97fb6be32004177330",
+        "hash": "d6c0c84563424d0bde3f14c3bf0edbdd38b5cf9a70a7d6add1845a6c2114a893"
     }
 ]
