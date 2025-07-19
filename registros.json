@@ -38,5 +38,16 @@
         "timestamp": 1752940051.8937285,
         "previous_hash": "699f69d00bff1d3cda7f0dac27e776a5fad1dc65de08ac97fb6be32004177330",
         "hash": "d6c0c84563424d0bde3f14c3bf0edbdd38b5cf9a70a7d6add1845a6c2114a893"
+    },
+    {
+        "index": 4,
+        "data": {
+            "nombre": "Final ",
+            "apellido": "Apellido final",
+            "cedula": "55564123"
+        },
+        "timestamp": 1752940225.0208254,
+        "previous_hash": "d6c0c84563424d0bde3f14c3bf0edbdd38b5cf9a70a7d6add1845a6c2114a893",
+        "hash": "40c608179b957575910ec2bf3bdf1fbb9c619d04787fc308e763aacca9b03e5d"
     }
 ]
