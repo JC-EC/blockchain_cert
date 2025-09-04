@@ -6,16 +6,11 @@ git commit -m "Primer commit"
 git push -u origin master
 git push -u origin main
 git checkout master -> cambiar de rama
-
-
 git diff --name-only -> Ver qué archivos están modificados pero no añadidos
-
-
 VERIFICAR SI EL REMOTO ESTA ENLAZADO
 1. Verifica los remotos configurados
 git remote -v
 si se muestra algo esta enlazo tu repositorio caso contratio seguir lo siguiente.
-
 2. Agrega el remoto (origin)
 Debes enlazar tu repositorio local con el de GitHub.
 Ejemplo:
@@ -29,4 +24,24 @@ git push -u origin main
 4. Si ya existía un origin pero está mal
 git remote remove origin
 Y vuelve a agregarlo con el paso 2
+
+*****************
+1. git reset --hard
+Restaura todos los archivos del working directory y el staging area al último commit.
+⚠️ Descarta todos los cambios no guardados (sin commit).
+Ejemplo: si cambiaste Pasos.txt y no lo commiteaste → lo perderás.
+
+2. git clean -fd
+Elimina todos los archivos no rastreados (untracked) y carpetas.
+Equivale a borrar los archivos que no están en Git (por ejemplo: Render.png, app.py, PDFs generados, etc.).
+⚠️ Se pierden permanentemente.
+
+3. git checkout main
+Intenta cambiar a la rama main.
+Como ya limpiaste el repositorio con los 2 pasos anteriores, ahora no hay bloqueos y puedes cambiar de rama.
+
+git reset --hard
+git clean -fd
+git checkout main
+
 Final
