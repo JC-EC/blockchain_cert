@@ -1,0 +1,32 @@
+python app.py
+git init
+git status
+git add .
+git commit -m "Primer commit"
+git push -u origin master
+git push -u origin main
+git checkout master -> cambiar de rama
+
+
+git diff --name-only -> Ver qué archivos están modificados pero no añadidos
+
+
+VERIFICAR SI EL REMOTO ESTA ENLAZADO
+1. Verifica los remotos configurados
+git remote -v
+si se muestra algo esta enlazo tu repositorio caso contratio seguir lo siguiente.
+
+2. Agrega el remoto (origin)
+Debes enlazar tu repositorio local con el de GitHub.
+Ejemplo:
+git remote add origin https://github.com/USUARIO/REPOSITORIO.git
+
+3. Sube la rama principal
+GitHub ahora usa main como rama por defecto, pero si tu repo es master puedes forzar el push:
+git push -u origin master
+git push -u origin main
+
+4. Si ya existía un origin pero está mal
+git remote remove origin
+Y vuelve a agregarlo con el paso 2
+Final
