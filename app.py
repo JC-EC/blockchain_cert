@@ -3,6 +3,8 @@ from blockchain import Blockchain
 import os
 import qrcode
 from xhtml2pdf import pisa
+import re
+from unidecode import unidecode  # Para eliminar tildes y caracteres especiales
 
 app = Flask(__name__)
 
@@ -19,6 +21,15 @@ def generar_pdf(html_string, pdf_path):
     with open(pdf_path, "w+b") as f:
         pisa.CreatePDF(html_string, dest=f)
 
+def normalizar_texto(texto):
+    # Eliminar tildes
+    texto = unidecode(texto)
+    # Convertir a mayÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºsculas
+    texto = texto.upper()
+    # Eliminar caracteres que no sean letras o nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºmeros
+    texto = re.sub(r'[^A-Z0-9]', '', texto)
+    return texto
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -34,13 +45,20 @@ def registrar():
 
     hash_code = bloque.hash
 
-    qr_path = f"{QR_FOLDER}/{hash_code}.png"
+    # Normalizar nombre y apellido para PDF y QR
+    nombre_pdf = normalizar_texto(nombre)
+    apellido_pdf = normalizar_texto(apellido)
+    archivo_base = f"{nombre_pdf}_{apellido_pdf}"
+
+    # Generar QR con el mismo nombre
+    qr_path = f"{QR_FOLDER}/{archivo_base}.png"
     qr = qrcode.make(hash_code)
     qr.save(qr_path)
 
     rendered_html = render_template('certificado.html', data=datos, hash=hash_code, qr_path=qr_path)
 
-    pdf_path = f"{PDF_FOLDER}/{hash_code}.pdf"
+    # Generar PDF
+    pdf_path = f"{PDF_FOLDER}/{archivo_base}.pdf"
     generar_pdf(rendered_html, pdf_path)
 
     return render_template('certificado.html', data=datos, hash=hash_code, qr_path=qr_path)
