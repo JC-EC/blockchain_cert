@@ -115,5 +115,27 @@
         "timestamp": 1757002826.5813293,
         "previous_hash": "2fb5d1f1b03a858c6a110bbc6b25f62c6297fab8072023122b40f11a221c892c",
         "hash": "365eb88e7f6c082910e902c4d306a0c43d7ae156e9df4a202a2c051c5aa9138a"
+    },
+    {
+        "index": 11,
+        "data": {
+            "nombre": "Wlady",
+            "apellido": "Bedoya",
+            "cedula": "12345"
+        },
+        "timestamp": 1757531348.6329844,
+        "previous_hash": "365eb88e7f6c082910e902c4d306a0c43d7ae156e9df4a202a2c051c5aa9138a",
+        "hash": "02c58c264559b0e50b2ab4b16ef64ebd06fe348628799d473887bc2f81a68c65"
+    },
+    {
+        "index": 12,
+        "data": {
+            "nombre": "Sofia",
+            "apellido": "Cabrera",
+            "cedula": "098765432"
+        },
+        "timestamp": 1757621443.6572168,
+        "previous_hash": "02c58c264559b0e50b2ab4b16ef64ebd06fe348628799d473887bc2f81a68c65",
+        "hash": "761fec301e5357e9dc81eaab1c336a3ce49c4563d3230a54d41aaf51f273302b"
     }
 ]
