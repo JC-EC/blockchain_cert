@@ -5,6 +5,7 @@ import qrcode
 from xhtml2pdf import pisa
 import re
 from unidecode import unidecode  # Para eliminar tildes y caracteres especiales
+import ipfshttpclient #agrega la libreria de ipfs
 
 app = Flask(__name__)
 
@@ -16,6 +17,7 @@ os.makedirs(QR_FOLDER, exist_ok=True)
 os.makedirs(PDF_FOLDER, exist_ok=True)
 
 blockchain = Blockchain(file_path=JSON_FILE)
+ipfs_client = ipfshttpclient.connect('/ip4/127.0.0.1/tcp/5001/http') # Conectar a IPFS
 
 def generar_pdf(html_string, pdf_path):
     with open(pdf_path, "w+b") as f:
@@ -24,9 +26,9 @@ def generar_pdf(html_string, pdf_path):
 def normalizar_texto(texto):
     # Eliminar tildes
     texto = unidecode(texto)
-    # Convertir a mayÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºsculas
+    # Convertir a mayÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºsculas
     texto = texto.upper()
-    # Eliminar caracteres que no sean letras o nÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Âºmeros
+    # Eliminar caracteres que no sean letras o nÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Âºmeros
     texto = re.sub(r'[^A-Z0-9]', '', texto)
     return texto
 
@@ -40,8 +42,21 @@ def registrar():
     apellido = request.form['apellido']
     cedula = request.form['cedula']
 
-    datos = {'nombre': nombre, 'apellido': apellido, 'cedula': cedula}
+# Diccionario de datos:
+    ipfs_pdf_url = None
+    ipfs_qr_url = None
+
+    datos = {
+        'nombre': nombre,
+        'apellido': apellido,
+        'cedula': cedula,
+        'ipfs_pdf': ipfs_pdf_url,
+        'ipfs_qr': ipfs_qr_url
+    }
+
+    # datos = {'nombre': nombre, 'apellido': apellido, 'cedula': cedula}
     bloque = blockchain.add_block(datos)
+
 
     hash_code = bloque.hash
 
@@ -56,12 +71,36 @@ def registrar():
     qr.save(qr_path)
 
     rendered_html = render_template('certificado.html', data=datos, hash=hash_code, qr_path=qr_path)
-
     # Generar PDF
     pdf_path = f"{PDF_FOLDER}/{archivo_base}.pdf"
     generar_pdf(rendered_html, pdf_path)
 
-    return render_template('certificado.html', data=datos, hash=hash_code, qr_path=qr_path)
+   #SE Carga el PDF y el QR a IPFS
+    # Subir PDF a IPFS
+    import os
+
+    if os.path.exists(pdf_path):
+        res_pdf = ipfs_client.add(pdf_path)
+        ipfs_pdf_url = f"https://ipfs.io/ipfs/{res_pdf['Hash']}"
+    else:
+        print(f"El archivo PDF no existe: {pdf_path}")
+
+    if os.path.exists(qr_path):
+        res_qr = ipfs_client.add(qr_path)
+        ipfs_qr_url = f"https://ipfs.io/ipfs/{res_qr['Hash']}"
+    else:
+        print(f"El archivo QR no existe: {qr_path}")
+
+    
+    
+    return render_template(
+        'certificado.html',
+        data=datos,
+        hash=hash_code,
+        qr_path=qr_path,
+        ipfs_pdf_url=ipfs_pdf_url,
+        ipfs_qr_url=ipfs_qr_url
+    )
 
 @app.route('/verificar/<hash_code>')
 def verificar(hash_code):

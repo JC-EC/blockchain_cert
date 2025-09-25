@@ -29,7 +29,7 @@ class Blockchain:
         self.file_path = file_path
         self.chain = []
         self.load_chain()
-        # Asegurar que la cadena nunca estÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â© vacÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â­a
+        # Asegurar que la cadena nunca estÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â© vacÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â­a
         if len(self.chain) == 0:
             self.chain.append(self.create_genesis_block())
             self.save_chain()
@@ -66,7 +66,7 @@ class Blockchain:
         return block
 
     def create_genesis_block(self):
-        return Block(0, "Bloque GÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©nesis", time.time(), "0")
+        return Block(0, "Bloque GÃƒÆ’Ã†â€™Ãƒâ€ Ã¢â‚¬â„¢ÃƒÆ’Ã¢â‚¬Å¡Ãƒâ€šÃ‚Â©nesis", time.time(), "0")
 
     def get_latest_block(self):
         return self.chain[-1]

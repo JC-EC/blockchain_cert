@@ -43,5 +43,9 @@ Como ya limpiaste el repositorio con los 2 pasos anteriores, ahora no hay bloque
 git reset --hard
 git clean -fd
 git checkout main
+*++++++++++++++++++++++++++++++++++++++++++++*
+ENTORNO VIRTUAL
+source pruebaUEES/Scripts/activate
+
 
 Final
