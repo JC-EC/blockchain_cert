@@ -1,0 +1,7 @@
+Flask==3.1.2
+ipfshttpclient==0.7.0
+pytz==2025.2
+qrcode==8.2
+Requests==2.32.5
+Unidecode==1.4.0
+xhtml2pdf==0.2.17
