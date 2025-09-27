@@ -2,47 +2,80 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <title>Registro de Certificado</title>
+    <title>Registro de Certificado Sacramental</title>
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     />
+    <script>
+      function mostrarCampos() {
+        const tipo = document.getElementById("tipo").value;
+        const extraFields = document.getElementById("extra-fields");
+        extraFields.innerHTML = "";
+
+        if (tipo === "Bautismo") {
+          extraFields.innerHTML = `
+            <label class="form-label">Tomo:</label><input class="form-control" name="tomo" required>
+            <label class="form-label">Página:</label><input class="form-control" name="pagina" required>
+            <label class="form-label">Número:</label><input class="form-control" name="numero" required>
+            <label class="form-label">Fecha:</label><input type="date" class="form-control" name="fecha" required>
+            <label class="form-label">Lugar y Fecha de Nacimiento:</label><input class="form-control" name="nacimiento" required>
+            <label class="form-label">Padre:</label><input class="form-control" name="padre" required>
+            <label class="form-label">Madre:</label><input class="form-control" name="madre" required>
+            <label class="form-label">Padrino/Madrina:</label><input class="form-control" name="madrina" required>
+            <label class="form-label">Ministro:</label><input class="form-control" name="ministro" required>
+            <label class="form-label">Registro Civil - Año:</label><input class="form-control" name="regA" required>
+            <label class="form-label">Tomo:</label><input class="form-control" name="regT" required>
+            <label class="form-label">Página:</label><input class="form-control" name="regP" required>
+            <label class="form-label">Acta:</label><input class="form-control" name="regAc" required>
+          `;
+        } else if (tipo === "Comunión" || tipo === "Confirmación") {
+          extraFields.innerHTML = `
+            <label class="form-label">Cédula:</label><input class="form-control" name="cedula" required>
+            <label class="form-label">Año del Sacramento:</label><input class="form-control" name="anio" required>
+          `;
+        } else if (tipo === "Matrimonio") {
+          extraFields.innerHTML = `
+            <label class="form-label">Nombre Esposo:</label><input class="form-control" name="esposo" required>
+            <label class="form-label">Nombre Esposa:</label><input class="form-control" name="esposa" required>
+            <label class="form-label">Padrinos:</label><input class="form-control" name="padrinos" required>
+            <label class="form-label">Fecha Matrimonio:</label><input type="date" class="form-control" name="fechaMat" required>
+            <label class="form-label">Ministro:</label><input class="form-control" name="ministro" required>
+          `;
+        }
+      }
+    </script>
   </head>
   <body class="bg-light">
     <div class="container mt-5">
       <h2 class="mb-4">Registrar Certificado Sacramental</h2>
       <form action="/registrar" method="POST">
         <div class="mb-3">
-          <label for="nombre" class="form-label">Nombre:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="nombre"
-            name="nombre"
+          <label class="form-label">Tipo de Certificado:</label>
+          <select
+            class="form-select"
+            id="tipo"
+            name="tipo"
+            onchange="mostrarCampos()"
             required
-          />
+          >
+            <option value="">Seleccione...</option>
+            <option value="Bautismo">Bautismo</option>
+            <option value="Comunión">Comunión</option>
+            <option value="Confirmación">Confirmación</option>
+            <option value="Matrimonio">Matrimonio</option>
+          </select>
         </div>
         <div class="mb-3">
-          <label for="apellido" class="form-label">Apellido:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="apellido"
-            name="apellido"
-            required
-          />
+          <label class="form-label">Nombres:</label>
+          <input type="text" class="form-control" name="nombre" required />
         </div>
         <div class="mb-3">
-          <label for="cedula" class="form-label">Cédula:</label>
-          <input
-            type="text"
-            class="form-control"
-            id="cedula"
-            name="cedula"
-            required
-          />
+          <label class="form-label">Apellidos:</label>
+          <input type="text" class="form-control" name="apellido" required />
         </div>
-        <button type="submit" class="btn btn-primary">
+        <div id="extra-fields"></div>
+        <button type="submit" class="btn btn-primary mt-3">
           Generar Certificado
         </button>
       </form>

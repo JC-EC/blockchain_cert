@@ -47,5 +47,12 @@ git checkout main
 ENTORNO VIRTUAL
 source pruebaUEES/Scripts/activate
 
+Los archivos de 
+index_OK.html
+certificado_OK.html
+app_OK.py
+
+SON LOS ARCHIVOS QUE ESTAN BIEN PARA EL MUESTREO
+
 
 Final
